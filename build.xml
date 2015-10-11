@@ -36,9 +36,9 @@
 		<mkdir dir="${jar.dir}" />
 		<echo message="|----------------Building HelloWorld.jar--------------|" />
 		<echo message="|-----------------------------------------------------|" />
-		<jar destfile="${jar.dir}/HelloWorldTester.jar" basedir="${main.build.dir}">
+		<jar destfile="${jar.dir}/HelloWorld.jar" basedir="${main.build.dir}">
 			<manifest>
-				<attribute name="Main-Class" value="HelloWorld.HelloWorldTester" />
+				<attribute name="Main-Class" value="HelloWorld.HelloWorld" />
 			</manifest>
 		</jar>
 		<echo message="|-----------------------------------------------------|" />
@@ -63,7 +63,7 @@
 		<echo message="|-----------------------------------------------------|" />
 		<junit printsummary="yes" haltonfailure="no" showoutput="true" outputtoformatters="true">
 			<classpath>
-				<path refid="classpath.test" />
+				<path refid="classpath.dependencies" />
 				<pathelement location="${main.build.dir}" />
 			</classpath>
 			<formatter type="plain" usefile="false" />
