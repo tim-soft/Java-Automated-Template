@@ -1,0 +1,20 @@
+language: java
+
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: ""
+
+addons:
+  coverity_scan:
+    project:
+      name: "tim-soft/Java-Automated-Template"
+      description: "Java template project for integrating ANT, Travis-CI, Coverity and JUnit with Github"
+    notification_email: timellenberger@gmail.com
+    build_command_prepend: "cov-configure --java"
+    build_command:   "ant compile -logger org.apache.tools.ant.listener.AnsiColorLogger"
+    branch_pattern: coverity_scan
+
+script: ant runAppAndUnitTests -logger org.apache.tools.ant.listener.AnsiColorLogger
+
