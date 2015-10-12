@@ -8,7 +8,7 @@ HelloWorld + Unit Tests  | Coverity
 This project serves as a starting point for setting up your own continuous integration with Github.
 For preliminary messing around, I've included an Eclipse IDE .project file for easy import. 
 ######If you are using eclipse and want to play with this project:
-1. Fork it!
+1. `Fork it!`
 2. Either `clone the project using git` or `import as an existing project using the EGit plugin for Eclipse`, I prefer the latter   
 3. `Log into Coverity and Travis-CI using your Github account`
 4. `Point these services at your fork'd repo`
