@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
 <project name="java-junit-template-project" default="runAppAndUnitTests" basedir=".">
+	<!--
+		Setup path variables
+	-->
 	<property name="main.build.dir" value="build/main" />
 	<property name="jar.dir" value="build/jar" />
 	<property name="main.src.dir" value="JavaAutomatedTemplate/src/HelloWorld" />
@@ -7,7 +10,7 @@
 	<path id="classpath.base" />
 
 	<!--
-		Add dependecies to classpath
+		Add the dependecies for JUnit to the classpath, conventiently located in the */lib/ folder for travis-ci
 	-->
 	<path id="classpath.dependencies">
 		<pathelement location="JavaAutomatedTemplate/lib/junit.jar" />
@@ -16,10 +19,8 @@
 		<path refid="classpath.base" />
 	</path>
 
-	<target name="runAppAndUnitTests" depends="runHelloWorld, runUnitTests, clean" />
-
 	<!--
-		Compile source files
+		Compile all of the *.java source files inside the src/HelloWorld folder
 	-->
 	<target name="compile">
 		<mkdir dir="${main.build.dir}" />
@@ -30,7 +31,7 @@
 	</target>
 
 	<!--
-		Build .jar files
+		Build HelloWorld.jar
 	-->
 	<target name="jar" depends="compile">
 		<mkdir dir="${jar.dir}" />
@@ -46,7 +47,7 @@
 	</target>
 
 	<!--
-		Execute HelloWorldTester.jar
+		Execute HelloWorld.jar
 	-->
 	<target name="runHelloWorld" depends="jar">
 		<echo message="|--------------Executing HelloWorld.jar---------------|" />
@@ -56,8 +57,11 @@
 		<echo message="|-------------HelloWorld.jar  Complete----------------|" />
 	</target>
 
-	<!-- Test and build all files  -->
-	<!-- To run this: use "ant" (default) or "ant run" -->
+	<!-- 
+		Execute all of the unit tests in our JUnit HelloWorldTester.class file
+
+		Also, Include a printout of the JUnit results and use a formatter to pretty-up the output
+	-->
 	<target name="runUnitTests" depends="compile">
 		<echo message="|-----------------Executing Unit Tests----------------|" />
 		<echo message="|-----------------------------------------------------|" />
@@ -75,12 +79,23 @@
 		<echo message="|----------------Unit Testing Complete----------------|" />
 	</target>
 
-	<!-- delete all class files -->
-	<!-- To run this: use "ant clean" -->
+	<!-- 
+		Perform a cleanup by deleting all *.class files 
+	-->
 	<target name="clean">
 		<delete>
 			<fileset dir="${basedir}" includes="**/*.class" />
 		</delete>
 		<echo message="clean done" />
 	</target>
+
+	<!--
+		Create a target for running the main application, the unit tests and then perform cleanup
+
+		in .travis.yml, use the script command ==> run ant runAppAndUnitTests
+
+		In this sample project, I included the postfix -logger org.apache.tools.ant.listener.AnsiColorLogger 
+		to color-up the output text in travis-ci 
+	-->
+	<target name="runAppAndUnitTests" depends="runHelloWorld, runUnitTests, clean" />
 </project>
